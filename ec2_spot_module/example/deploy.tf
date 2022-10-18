@@ -1,4 +1,5 @@
-module <bla> "ec2" {
+module "example" {
+  source = "git::https://github.com/joebywan/tfmodules.git//ec2_spot_module"
   spot = false # Optional, defaults to false.
   security_group_rules = [
     {
