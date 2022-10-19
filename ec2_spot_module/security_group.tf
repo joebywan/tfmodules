@@ -5,12 +5,11 @@ resource "aws_security_group" "security_group" {
 
   dynamic "ingress" {
     for_each = var.security_group_rules
-    iterator = rules
     content {
-      from_port   = lookup(rules[port])
-      to_port     = lookup(rules[port])
+      from_port   = ingress.value.port
+      to_port     = ingress.value.port
       protocol    = "tcp"
-      cidr_blocks = [lookup(rules[cidr])]
+      cidr_blocks = [ingress.value.cidr]
     }
   }
   egress {
