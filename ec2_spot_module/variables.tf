@@ -60,7 +60,7 @@ variable "operating_system" {
 
 locals {
   amazon_linux_2 = var.operating_system == "AMAZONLINUX2" ? data.aws_ami.amazon_linux_v2_ami.id : ""
-  ubuntu_2204 = var.operating_system == "UBUNTU2204" ? data.aws_ami.ubuntu_linux_v2204_ami.id : ""
+  ubuntu_2204 = var.operating_system == "UBUNTU" ? data.aws_ami.ubuntu_linux_v2204_ami.id : ""
   ami_to_use = coalesce(local.amazon_linux_2,local.ubuntu_2204)
 }
 
