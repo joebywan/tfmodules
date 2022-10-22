@@ -11,7 +11,7 @@ resource "aws_spot_instance_request" "ec2_instance" {
   iam_instance_profile   = var.instance_profile
   vpc_security_group_ids = [aws_security_group.security_group.id]
   subnet_id              = var.subnet_id
-  user_data              = file(var.userdata)
+  user_data              = var.userdata
 
   root_block_device {
     volume_type = "gp3"
@@ -26,7 +26,7 @@ resource "aws_spot_instance_request" "ec2_instance" {
   # Spot specific settings
   spot_type = var.spot_type
   spot_price = tostring(var.spot_price)
-  instance_interruption_behaviour = var.spot_instance_interruption_behaviour
+  instance_interruption_behavior = var.spot_instance_interruption_behaviour
   # wait_for_fulfillment = false
   # block_duration_minutes = 60
   # launch_group = "specify here"
