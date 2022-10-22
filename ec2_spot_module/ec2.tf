@@ -27,7 +27,7 @@ resource "aws_spot_instance_request" "ec2_instance" {
   spot_type = var.spot_type
   spot_price = tostring(var.spot_price)
   instance_interruption_behavior = var.spot_instance_interruption_behaviour
-  # wait_for_fulfillment = false
+  wait_for_fulfillment = true
   # block_duration_minutes = 60
   # launch_group = "specify here"
   # valid_from = "YYYY-MM-DDTHH:MM:SSZ"
