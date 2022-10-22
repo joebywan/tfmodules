@@ -11,7 +11,7 @@ resource "aws_spot_instance_request" "ec2_instance" {
   iam_instance_profile   = var.instance_profile
   vpc_security_group_ids = [aws_security_group.security_group.id]
   subnet_id              = var.subnet_id
-  user_data              = var.userdata
+  user_data              = local.userdata
 
   root_block_device {
     volume_type = "gp3"
@@ -42,7 +42,7 @@ resource "aws_instance" "ec2_instance" {
   iam_instance_profile   = var.instance_profile
   vpc_security_group_ids = [aws_security_group.security_group.id]
   subnet_id              = var.subnet_id
-  user_data              = file(var.userdata)
+  user_data              = local.userdata
 
   root_block_device {
     volume_type = "gp3"

@@ -64,10 +64,14 @@ locals {
   ami_to_use = coalesce(local.amazon_linux_2,local.ubuntu_2204)
 }
 
-variable "userdata" {
+variable "userdata_filepath" {
   type = string
   description = "Userdata file to use"
   default = "file(./blank_userdata.sh)"
+}
+
+locals {
+  userdata = file(var.userdata_filepath)
 }
 
 variable "root_drive_size" {
