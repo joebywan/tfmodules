@@ -16,6 +16,9 @@ resource "aws_spot_instance_request" "ec2_instance" {
   root_block_device {
     volume_type = "gp3"
     volume_size = var.root_drive_size
+    iops = 3000
+    throughput = 125
+    tags = merge({ Name = "${var.naming_prefix}-${var.operating_system}" }, var.tags)
   }
 
   tags = merge({ Name = "${var.naming_prefix}-${var.operating_system}" }, var.tags)
@@ -23,6 +26,7 @@ resource "aws_spot_instance_request" "ec2_instance" {
   # Spot specific settings
   spot_type = var.spot_type
   spot_price = tostring(var.spot_price)
+  instance_interruption_behaviour = var.spot_instance_interruption_behaviour
   # wait_for_fulfillment = false
   # block_duration_minutes = 60
   # launch_group = "specify here"

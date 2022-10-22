@@ -67,7 +67,7 @@ locals {
 variable "userdata" {
   type = string
   description = "Userdata file to use"
-  default = "./blank_userdata.sh"
+  default = "file(./blank_userdata.sh)"
 }
 
 variable "root_drive_size" {
@@ -102,4 +102,14 @@ variable "spot_price" {
   type = number
   description = "Max spot price to bid.  Be aware instance will be interrupted if the current price goes over this"
   nullable = true
+}
+
+variable "spot_instance_interruption_behaviour" {
+  type = string
+  description = "Operation to take when the instance is interrupted.  Options are terminate, stop or hibernate."
+  default = "terminate"
+  validation {
+    condition = anytrue([for a in ["stop","terminate","hibernate"] : var.spot_instance_interruption_behaviour == a])
+    error_message = "Options are stop, terminate or hibernate."
+  }
 }
