@@ -8,10 +8,22 @@ variable "aws_account" {
   type        = string
 }
 
-variable "security_group_ports" {
-  type        = list(number)
-  description = "Security group ports required"
-  default     = [80,443]
+variable "security_group_rules" {
+  type = list(object({
+    port = number
+    cidr = string
+  }))
+  description = "Security group rules"
+  default = [
+    {
+      port = 80
+      cidr = "0.0.0.0/0"
+    },
+    {
+      port = 443
+      cidr = "0.0.0.0/0"
+    }
+  ]
 }
 
 variable "ec2_key" {
@@ -42,36 +54,52 @@ variable "tags" {
 }
 
 variable "operating_system" {
-  type = string
+  type        = string
   description = "Which OS? AMAZONLINUX2 or UBUNTU"
 }
 
 variable "userdata" {
-  type = string
+  type        = string
   description = "path to userdata file"
+  nullable    = true
 }
 
 variable "root_drive_size" {
-  type = number
+  type        = number
   description = "Size of the root drive."
 }
 
 variable "instance_type" {
-  type = string
+  type        = string
   description = "Type of instance?  e.g. t3.micro."
 }
 
 variable "instance_profile" {
-  type = string
+  type        = string
   description = "Name of the instance profile to use"
 }
 
 variable "spot_type" {
-  type = string
+  type        = string
   description = "Valid options are one-time or persistent"
 }
 
 variable "spot_price" {
-  type = number
+  type        = number
   description = "Price to bid for the instance."
+}
+
+variable "spot" {
+  type    = bool
+  default = false
+}
+
+variable "spot_instance_interruption_behaviour" {
+  type        = string
+  description = "Operation to take when the instance is interrupted.  Options are terminate, stop or hibernate."
+  default     = "terminate"
+  validation {
+    condition     = anytrue([for a in ["stop", "terminate", "hibernate"] : var.spot_instance_interruption_behaviour == a])
+    error_message = "Options are stop, terminate or hibernate."
+  }
 }
