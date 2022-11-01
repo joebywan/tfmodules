@@ -29,7 +29,7 @@ data "aws_ami" "ubuntu_linux_v2204_ami" { # AMI for ubuntu 22.04
 
   filter {
     name = "name"
-    values = ["*22.04*"]
+    values = ["ubuntu/images/hvm-ssd/*22.04*"]
   }
   filter {
     name = "root-device-type"
