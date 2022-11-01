@@ -7,12 +7,18 @@ terraform {
   }
 }
 
-#---- AWS Profile instead of IAM Keys ----#
+# No role
 provider "aws" {
   region  = "ap-southeast-2"
   profile = "default"
-  assume_role {
-    role_arn     = "arn:aws:iam::${var.aws_account}:role/${var.role_to_assume}"
-    session_name = "ec2tfmodule-role-assumed"
-  }
 }
+
+# Role
+# provider "aws" {
+#   region  = "ap-southeast-2"
+#   profile = "default"
+#   assume_role {
+#     role_arn     = "arn:aws:iam::${var.aws_account}:role/${var.role_to_assume}"
+#     session_name = "ec2tfmodule-role-assumed"
+#   }
+# }
