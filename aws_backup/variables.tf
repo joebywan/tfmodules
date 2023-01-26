@@ -2,6 +2,6 @@ variable "email_address" {
   type = string
 }
 
-variable "start_times" {
+variable "days_between_execution" {
   type = list(string)
 }
