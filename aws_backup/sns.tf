@@ -24,7 +24,7 @@ data "aws_iam_policy_document" "awsbackup_to_sns" {
     }
 
     resources = [
-      aws_sns_topic.test.arn,
+      aws_sns_topic.backup_notifications.arn,
     ]
 
     sid = "__default_statement_ID"
