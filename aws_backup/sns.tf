@@ -1,10 +1,11 @@
 resource "aws_sns_topic" "backup_notifications" {
   name = "BackupFailedNotifications"
+}
 
-  subscription {
-    protocol = "email"
-    endpoint = var.email_address
-  }
+resource "aws_sns_topic_subscription" "email" {
+  topic_arn = aws_sns_topic.backup_notifications.arn
+  protocol = "email"
+  endpoint = var.email_address
 }
 
 data "aws_iam_policy_document" "awsbackup_to_sns" {
