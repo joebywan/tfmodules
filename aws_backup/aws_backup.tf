@@ -25,7 +25,7 @@ resource "aws_backup_selection" "example" {
   selection_tag {
     type = "STRINGEQUALS"
     key = "backup"
-    value = "7"
+    value = "${var.days_between_executions[count.index]}"
   }
 }
 
