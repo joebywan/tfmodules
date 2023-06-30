@@ -2,7 +2,9 @@
 
 This repository contains the Terraform module for automatically removing the FullAWSAccess Service Control Policy (SCP) from newly created AWS accounts and replacing it with a NoPermissions SCP. It also sends a notification to an Amazon SNS topic when this event occurs.
 
-The module creates an AWS Lambda function that's triggered by a CloudWatch Events rule. The rule is configured to fire on the `CreateAccountResult` event in AWS Organizations. When a new account is created and the event fires, the Lambda function checks if the `FullAWSAccess` SCP is attached to the account. If it is, the function replaces it with a `NoPermissions` SCP and sends a notification to an SNS topic.
+The module creates an AWS Lambda function that's triggered by a Eventbridge rule. The rule is configured to fire on the `CreateAccountResult` event in AWS Organizations. When a new account is created and the event fires, the Lambda function checks if the `FullAWSAccess` SCP is attached to the account. If it is, the function replaces it with a `NoPermissions` SCP and sends a notification to an SNS topic.
+
+Reason for this is that by default the root OU has FullAWSAccess SCP attached, which is inherited on new account creation, allowing any new accounts by default to do whatever.  This setup removes that, stopping the unlimited access, while not impeding any future added SCPs from taking effect.
 
 ## Requirements
 
