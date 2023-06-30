@@ -38,3 +38,7 @@ Contributions to this module are welcome. Please submit a pull request with any 
 ## License
 
 This module is licensed under the MIT License. See the [LICENSE](LICENSE) file for details.
+
+## Acknowledgments
+
+Gotta credit Alan Jones (https://www.linkedin.com/in/alanjonesit/) for the zero permissions SCP, I just wrapped the automation around it
