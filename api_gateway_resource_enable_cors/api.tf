@@ -10,9 +10,9 @@ variable "api_gateway_resource_ids" {
 
 # Make the options method
 resource "aws_api_gateway_method" "options" {
-    for_each = var.api_gateway_resource_ids
+    for_each = {for i, val in var.api_gateway_resource_ids: i => val}
     rest_api_id = var.api_gateway_id
-    resource_id = each.key
+    resource_id = each.value
     http_method = "OPTIONS"
     authorization = "NONE"
 }
@@ -22,9 +22,9 @@ resource "aws_api_gateway_integration" "options" {
     depends_on = [ 
         aws_api_gateway_method.options 
     ]
-    for_each = var.api_gateway_resource_ids
+    for_each = {for i, val in var.api_gateway_resource_ids: i => val}
     rest_api_id = var.api_gateway_id
-    resource_id = each.key
+    resource_id = each.value
     http_method = "ANY"
     type = "MOCK"
 
@@ -38,9 +38,9 @@ resource "aws_api_gateway_integration_response" "options" {
     depends_on = [ 
         aws_api_gateway_integration.options 
     ]
-    for_each = var.api_gateway_resource_ids
+    for_each = {for i, val in var.api_gateway_resource_ids: i => val}
     rest_api_id = var.api_gateway_id
-    resource_id = each.key
+    resource_id = each.value
     http_method = "ANY"
     status_code = 200
     response_parameters = {
@@ -54,9 +54,9 @@ resource "aws_api_gateway_method_response" "options" {
     depends_on = [ 
         aws_api_gateway_method.options 
     ]
-    for_each = var.api_gateway_resource_ids
+    for_each = {for i, val in var.api_gateway_resource_ids: i => val}
     rest_api_id = var.api_gateway_id
-    resource_id = each.key
+    resource_id = each.value
     http_method = "ANY"
     status_code = 200
     response_parameters = {
