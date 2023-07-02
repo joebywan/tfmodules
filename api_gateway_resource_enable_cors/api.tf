@@ -5,7 +5,7 @@ variable "api_gateway_id" {
 }
 
 variable "api_gateway_resource_ids" {
-    type = set(string)
+    type = list(string)
 }
 
 # Make the options method
