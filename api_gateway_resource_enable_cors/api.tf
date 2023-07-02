@@ -46,7 +46,7 @@ resource "aws_api_gateway_integration_response" "options" {
     integration_id = aws_api_gateway_integration.options.id
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = "Authorization,Content-Type,X-Amz-Date,X-Api-Key,X-Amz-Security-Token"
-        "method.reponse.header.Access-Control-Allow-Methods" = aws_api_gateway_integration.options.http_method
+        "method.reponse.header.Access-Control-Allow-Methods" = "'OPTIONS,GET,POST'"
         "method.response.header.Access-Control-Allow-Origin" = "*"
     }
 }
@@ -62,7 +62,7 @@ resource "aws_api_gateway_method_response" "options" {
     status_code = 200
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = "Authorization,Content-Type,X-Amz-Date,X-Api-Key,X-Amz-Security-Token"
-        "method.reponse.header.Access-Control-Allow-Methods" = aws_api_gateway_integration.options.http_method
+        "method.reponse.header.Access-Control-Allow-Methods" = "'OPTIONS,GET,POST'"
         "method.response.header.Access-Control-Allow-Origin" = "*"
     }
 
