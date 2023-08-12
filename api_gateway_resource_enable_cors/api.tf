@@ -25,7 +25,7 @@ resource "aws_api_gateway_integration" "options" {
     count = length(var.api_gateway_resource_ids)
     rest_api_id = var.api_gateway_id
     resource_id = var.api_gateway_resource_ids[count.index]
-    http_method = "ANY"
+    http_method = "OPTIONS"
     type = "MOCK"
 
     request_templates = {
@@ -41,7 +41,7 @@ resource "aws_api_gateway_integration_response" "options" {
     count = length(var.api_gateway_resource_ids)
     rest_api_id = var.api_gateway_id
     resource_id = var.api_gateway_resource_ids[count.index]
-    http_method = "ANY"
+    http_method = "OPTIONS"
     status_code = 200
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = "Authorization,Content-Type,X-Amz-Date,X-Api-Key,X-Amz-Security-Token"
@@ -57,7 +57,7 @@ resource "aws_api_gateway_method_response" "options" {
     count = length(var.api_gateway_resource_ids)
     rest_api_id = var.api_gateway_id
     resource_id = var.api_gateway_resource_ids[count.index]
-    http_method = "ANY"
+    http_method = "OPTIONS"
     status_code = 200
     response_parameters = {
         "method.response.header.Access-Control-Allow-Headers" = true
