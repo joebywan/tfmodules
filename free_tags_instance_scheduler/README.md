@@ -10,6 +10,8 @@ This one uses Lambda to bridge Tag based Resource Groups via Group Lifecycle Eve
 
 Checkout the example in ./example/deploy.tf
 
+Keep in mind there is a null resource in resource_groups.tf for enabling Group Lifecycle Events.  It looks like the TF AWS provider doesn't support enabling it, so I had to use the local-exec.  Make sure it's got the profile you want to run it.
+
 ## Requirements
 
 No requirements.
