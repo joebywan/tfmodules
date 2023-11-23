@@ -1,5 +1,5 @@
 module "rss_to_email" {
-  source   = "../"
+  source   = "git::https://github.com/joebywan/tfmodules.git//rss-email"
   name     = "rss-to-email"        # Name for the deployment to avoid name clashes with multiple deployments
   schedule = "cron(59 23 * * ? *)" # Default value is 11:59pm each night
   timezone = "Australia/Queensland"
