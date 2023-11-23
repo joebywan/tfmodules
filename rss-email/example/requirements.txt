@@ -1,0 +1,2 @@
+feedparser == 6.0.10
+pytz == 2023.3.post1
